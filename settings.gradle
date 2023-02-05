@@ -1,0 +1,24 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "SunyaikinMovies"
+include ':app'
+include ':core-ui'
+include ':feauture-movies-impl'
+include ':core-network-impl'
+include ':core-network-api'
+include ':core'
+include ':core-repository-api'
+include ':core-repository-impl'
+include ':feature-movie-details'
