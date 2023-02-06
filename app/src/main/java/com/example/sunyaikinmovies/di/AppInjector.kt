@@ -12,5 +12,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface AppInjector {
 
-    fun movieRepository(): CoreRepositoryApi<Flow<PagingData<@JvmSuppressWildcards Movie>>, @JvmSuppressWildcards MovieDetails>
+    fun movieRepository(): CoreRepositoryApi<Flow<PagingData<Movie>>, MovieDetails>
 }

@@ -14,6 +14,7 @@ import coil.transform.RoundedCornersTransformation
 import com.example.core.Movie
 import com.example.core.ui.R
 import javax.inject.Inject
+import javax.inject.Singleton
 
 class MoviesAdapter @Inject constructor() :
     PagingDataAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieComparator) {

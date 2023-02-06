@@ -13,10 +13,6 @@ class MainActivity : AppCompatActivity(), Router {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        window.apply {
-            statusBarColor = Color.TRANSPARENT
-        }
-
         if (savedInstanceState == null) {
             routeToMoviesList()
         }

@@ -1,5 +1,6 @@
 package com.example.core.repository.impl.data
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core.Movie
@@ -21,9 +22,10 @@ class MoviesPagingDataSource(
         val pageNumber = params.key ?: INITIAL_VALUE
         return try {
             val response = api.moviesRemoteService().getMoviesList(pageNumber)
-            val nextPageNumber: Int? = if (pageNumber == 1) null else (pageNumber - 1)
-            val prevPageNumber: Int? = pageNumber + 1
+            val prevPageNumber: Int? = if (pageNumber == 1) null else (pageNumber - 1)
+            val nextPageNumber: Int? = pageNumber + 1
 
+            Log.d("DEBUG", response.toString())
             LoadResult.Page(
                 data = response,
                 prevKey = prevPageNumber,

@@ -1,8 +1,10 @@
 package com.example.core.repository.impl.data
 
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.core.Movie
 import com.example.core.MovieDetails
 import com.example.core.repository.impl.data.MoviesPagingDataSource.Companion.MAX_PAGE_SIZE
