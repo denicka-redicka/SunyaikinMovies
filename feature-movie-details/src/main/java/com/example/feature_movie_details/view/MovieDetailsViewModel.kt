@@ -3,8 +3,8 @@ package com.example.feature_movie_details.view
 
 import androidx.lifecycle.*
 import androidx.paging.PagingData
-import com.example.core.Movie
-import com.example.core.MovieDetails
+import com.example.core.data.Movie
+import com.example.core.data.MovieDetails
 import com.example.core_repository_api.di.CoreRepositoryApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

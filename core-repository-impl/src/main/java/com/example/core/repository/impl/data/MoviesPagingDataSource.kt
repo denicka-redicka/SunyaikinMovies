@@ -3,8 +3,8 @@ package com.example.core.repository.impl.data
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.core.Movie
-import com.example.core.MovieDetails
+import com.example.core.data.Movie
+import com.example.core.data.MovieDetails
 import com.example.impl.di.CoreNetworkApi
 
 class MoviesPagingDataSource(

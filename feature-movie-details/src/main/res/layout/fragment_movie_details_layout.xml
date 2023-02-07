@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/banner" />
+            tools:src="@drawable/banner"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/back"
@@ -24,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/toolbar"
-            android:layout_marginVertical="24dp"/>
+            android:layout_marginVertical="52dp"/>
 
         <TextView
             android:id="@+id/movieName"

@@ -1,10 +1,10 @@
 package com.example.sunyaikinmovies
 
 import android.app.Application
-import androidx.lifecycle.LiveData
+import android.content.Context
 import androidx.paging.PagingData
-import com.example.core.Movie
-import com.example.core.MovieDetails
+import com.example.core.data.Movie
+import com.example.core.data.MovieDetails
 import com.example.core.repository.impl.di.RepositoryComponent
 import com.example.core.repository.impl.di.RepositoryDependencies
 import com.example.core_repository_api.di.CoreRepositoryApi
@@ -19,7 +19,7 @@ import com.example.sunyaikinmovies.di.AppInjector
 import com.example.sunyaikinmovies.di.DaggerAppComponent
 import kotlinx.coroutines.flow.Flow
 
-class MoviesApp: Application(), AppInjector, MoviesFeatureDependenciesProvider,
+class MoviesApp : Application(), AppInjector, MoviesFeatureDependenciesProvider,
     MovieDetailsFeatureDependenciesProvider {
 
     val appComponent: AppComponent by lazy {
@@ -32,12 +32,15 @@ class MoviesApp: Application(), AppInjector, MoviesFeatureDependenciesProvider,
     override val detailsDependencies: MovieDetailsFeatureDependencies = appComponent
     override fun movieRepository(): CoreRepositoryApi<Flow<PagingData<Movie>>, MovieDetails> =
         RepositoryComponent.initAndGet(
-            object: RepositoryDependencies {
-                override fun network(): CoreNetworkApi<List<Movie>, MovieDetails> = NetworkComponent.initAndGet()
-
+            object : RepositoryDependencies {
+                override fun network(): CoreNetworkApi<List<Movie>, MovieDetails> =
+                    NetworkComponent.initAndGet()
             }
         )
-
-
 }
 
+val Context.appComponent: AppComponent
+    get() = when (this) {
+        is MoviesApp ->  appComponent
+        else -> this.applicationContext.appComponent
+    }

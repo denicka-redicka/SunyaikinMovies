@@ -12,7 +12,6 @@ import retrofit2.Retrofit
 import retrofit2.create
 import java.util.concurrent.TimeUnit
 
-
 private val apiKey = "19da1bbd-22cd-49d4-90b1-bc39126b6de1"
 private val baseUrl = "https://kinopoiskapiunofficial.tech/api/v2.2/"
 

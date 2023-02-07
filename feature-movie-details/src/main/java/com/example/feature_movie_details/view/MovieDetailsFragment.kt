@@ -10,9 +10,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
-import com.example.core.MovieDetails
-import com.example.core.data.Router
+import com.example.core.data.MovieDetails
 import com.example.core.data.constants.MOVIE_ID_KEY
+import com.example.core.navigarion.NavigationDestination
+import com.example.core.navigarion.Router
 import com.example.feature_movie_details.R
 import com.example.feature_movie_details.di.ComponentViewModel
 import dagger.Lazy
@@ -21,18 +22,18 @@ import javax.inject.Inject
 class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details_layout) {
 
     companion object {
-        var router: Router? = null
-        fun create(id: Int, router: Router ) = MovieDetailsFragment().also {
+        fun create(id: Int) = MovieDetailsFragment().also {
             val args = bundleOf(
                 MOVIE_ID_KEY to id
             )
             it.arguments = args
-            this.router = router
         }
     }
 
     @Inject
     lateinit var moviesViewModelFactory: Lazy<MovieDetailsViewModel.MoviesVmFactory>
+    @Inject
+    lateinit var router: Router
 
     private val viewModel: MovieDetailsViewModel by viewModels {
         moviesViewModelFactory.get()
@@ -59,11 +60,6 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details_layout) {
 
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        router = null
-    }
-
     private fun renderUi(movieDetails: MovieDetails, view: View) {
         val movieName = view.findViewById<AppCompatTextView>(R.id.movieName)
         val poster = view.findViewById<AppCompatImageView>(R.id.moviePoster)
@@ -78,23 +74,24 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details_layout) {
         var countries = ""
         movieDetails.genres.forEachIndexed { index, genre ->
             if (index != movieDetails.genres.size - 1)
-                genresString += "$genre, "
+                genresString += "${genre.name}, "
             else
-                genresString += genre
+                genresString += genre.name
         }
         movieDetails.countries.forEachIndexed { index, country ->
             if (index != movieDetails.genres.size - 1)
-                genresString += "$country, "
+                countries += "${country.name}, "
             else
-                genresString += country
+                countries += country.name
         }
         genres.text = genresString
         additional.text = countries
         poster.load(movieDetails.posterUrl) {
             crossfade(true)
+
         }
         backButton.setOnClickListener {
-            router?.back()
+            router.navigateTo(NavigationDestination.Back)
         }
     }
 }

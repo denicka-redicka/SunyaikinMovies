@@ -1,7 +1,7 @@
 package com.example.impl.data
 
-import com.example.core.MovieDetails
 import com.example.impl.models.MovieDetailsResponse
+import com.example.impl.models.MoviesResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

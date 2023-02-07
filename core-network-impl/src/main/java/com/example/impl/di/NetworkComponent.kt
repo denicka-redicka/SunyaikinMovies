@@ -1,8 +1,7 @@
 package com.example.impl.di
 
-import com.example.core.Movie
-import com.example.core.MovieDetails
-import com.example.impl.di.CoreNetworkApi
+import com.example.core.data.Movie
+import com.example.core.data.MovieDetails
 import dagger.Component
 
 @Component(modules = [NetworkModule::class])

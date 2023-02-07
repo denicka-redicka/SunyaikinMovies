@@ -11,19 +11,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.example.core.Movie
+import com.example.core.data.Movie
+import com.example.core.navigarion.NavigationDestination
+import com.example.core.navigarion.Router
 import com.example.core.ui.R
 import javax.inject.Inject
-import javax.inject.Singleton
 
-class MoviesAdapter @Inject constructor() :
+class MoviesAdapter @Inject constructor(
+    private val router: Router
+) :
     PagingDataAdapter<Movie, MoviesAdapter.MovieViewHolder>(MovieComparator) {
-
-    private var onMovieClicked: ((Int) -> Unit)? = null
-
-    fun setClickListener(listener: (Int) -> Unit ) {
-        onMovieClicked = listener
-    }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -45,7 +42,11 @@ class MoviesAdapter @Inject constructor() :
 
         fun bind(movie: Movie?) {
             movieView.setOnClickListener {
-                onMovieClicked?.invoke(movie?.movieId?: -1)
+                router.navigateTo(
+                    NavigationDestination.MovieDetailsNavigation(
+                        movieId = movie?.movieId ?: -1
+                    )
+                )
             }
             name.text = movie?.name ?: ""
             info.text = movie?.year ?: ""

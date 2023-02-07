@@ -7,26 +7,15 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingData
-import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.data.Router
 import com.example.feauture_movies_impl.R
 import com.example.feauture_movies_impl.di.ComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MoviesFragment : Fragment(R.layout.fragment_movies_layout) {
-
-    companion object {
-        var router: Router? = null
-        fun create(router: Router) = MoviesFragment().also {
-            this.router = router
-        }
-    }
 
     @Inject lateinit var moviesViewModelFactory: Lazy<MoviesViewModel.MoviesVmFactory>
     @Inject lateinit var moviesAdapter: MoviesAdapter
@@ -54,10 +43,5 @@ class MoviesFragment : Fragment(R.layout.fragment_movies_layout) {
                 moviesAdapter.submitData(movies)
             }
         }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        router = null
     }
 }

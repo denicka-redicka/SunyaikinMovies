@@ -1,4 +1,4 @@
-package com.example.core
+package com.example.core.data
 
 data class Movie(
     val movieId: Int,

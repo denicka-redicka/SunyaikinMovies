@@ -1,9 +1,10 @@
 package com.example.feauture_movies_impl.di
 
+import com.example.core.di.Feature
 import com.example.feauture_movies_impl.view.MoviesFragment
 import dagger.Component
 
-@Component(dependencies = [MoviesFeatureDependencies::class])
+@[Feature Component(dependencies = [MoviesFeatureDependencies::class])]
 interface MoviesFeatureComponent {
 
     fun inject(fragment: MoviesFragment)

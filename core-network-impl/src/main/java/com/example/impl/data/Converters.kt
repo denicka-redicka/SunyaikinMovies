@@ -1,9 +1,10 @@
 package com.example.impl.data
 
-import com.example.core.Movie
-import com.example.core.MovieDetails
-import com.example.core.NamedValue
+import com.example.core.data.Movie
+import com.example.core.data.MovieDetails
+import com.example.core.data.NamedValue
 import com.example.impl.models.MovieDetailsResponse
+import com.example.impl.models.MoviesResponse
 
 fun MoviesResponse.toMoviesList(): List<Movie> {
     val list = mutableListOf<Movie>()

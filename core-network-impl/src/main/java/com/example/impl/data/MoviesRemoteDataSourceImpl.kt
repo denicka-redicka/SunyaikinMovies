@@ -1,7 +1,7 @@
 package com.example.impl.data
 
-import com.example.core.Movie
-import com.example.core.MovieDetails
+import com.example.core.data.Movie
+import com.example.core.data.MovieDetails
 import javax.inject.Inject
 
 class MoviesRemoteDataSourceImpl @Inject constructor(

@@ -1,7 +1,7 @@
 package com.example.core.repository.impl.di
 
-import com.example.core.Movie
-import com.example.core.MovieDetails
+import com.example.core.data.Movie
+import com.example.core.data.MovieDetails
 import com.example.impl.di.CoreNetworkApi
 
 interface RepositoryDependencies {
