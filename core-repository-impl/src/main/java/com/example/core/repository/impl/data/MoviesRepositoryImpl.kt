@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import com.example.core.data.Movie
 import com.example.core.data.MovieDetails
 import com.example.core_repository_api.data.MoviesRepository
+import com.example.impl.di.CoreLocalApi
 import com.example.impl.di.CoreNetworkApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -17,16 +18,18 @@ class MoviesRepositoryImpl @Inject constructor(
     private val networkApi: CoreNetworkApi<
             List<@JvmSuppressWildcards Movie>,
             @JvmSuppressWildcards MovieDetails
-            >
+            >,
+    daoApi: CoreLocalApi<@JvmSuppressWildcards MovieDetails>
 ) : MoviesRepository<Flow<@JvmSuppressWildcards PagingData<@JvmSuppressWildcards Movie>>, @JvmSuppressWildcards MovieDetails> {
 
+    private val dao = daoApi.getLocalDataSource()
 
     override fun getMoviesList(): Flow<PagingData<Movie>> {
         val pager = Pager(
             config = PagingConfig(5, enablePlaceholders = true),
             pagingSourceFactory = {
                 MoviesPagingDataSource(
-                    networkApi
+                    networkApi.moviesRemoteService()
                 )
             })
         return pager.flow
@@ -36,11 +39,16 @@ class MoviesRepositoryImpl @Inject constructor(
         return@withContext networkApi.moviesRemoteService().getMoviesInfo(id)
     }
 
-    override suspend fun getFavoritesList(): Flow<PagingData<Movie>> {
-        TODO("Not yet implemented")
+    override suspend fun getFavoritesList(): List<MovieDetails> {
+        return dao.getFavoritesList()
     }
 
     override suspend fun saveMovie(id: Int) {
-        TODO("Not yet implemented")
+        val movie = getMovieInfo(id)
+        dao.saveMovie(movie)
+    }
+
+    override fun removeMovie(id: Int) {
+        dao.removeMovie(id)
     }
 }

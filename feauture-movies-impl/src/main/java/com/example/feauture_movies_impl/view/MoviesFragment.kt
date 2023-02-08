@@ -34,6 +34,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies_layout) {
         super.onViewCreated(view, savedInstanceState)
 
         val movieList = view.findViewById<RecyclerView>(R.id.moviesList)
+        moviesAdapter.handleLongTouch = viewModel::handleOnStarClicked
         movieList.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         movieList.adapter = moviesAdapter
 

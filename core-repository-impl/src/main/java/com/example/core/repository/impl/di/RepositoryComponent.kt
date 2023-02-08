@@ -8,14 +8,18 @@ import dagger.Component
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Singleton
 
-@[Singleton Component(modules = [BindsModule::class], dependencies = [RepositoryDependencies::class])]
+@[Singleton Component(
+    modules = [BindsModule::class],
+    dependencies = [RepositoryDependencies::class]
+)]
 interface RepositoryComponent :
-    CoreRepositoryApi<Flow<@JvmSuppressWildcards PagingData<@JvmSuppressWildcards Movie>>, @JvmSuppressWildcards MovieDetails> {
+    CoreRepositoryApi<Flow<@JvmSuppressWildcards PagingData<@JvmSuppressWildcards Movie>>,
+            @JvmSuppressWildcards MovieDetails> {
 
-        companion object {
-            fun initAndGet(dependencies: RepositoryDependencies): RepositoryComponent =
-                DaggerRepositoryComponent.builder()
-                    .repositoryDependencies(dependencies)
-                    .build()
-        }
+    companion object {
+        fun initAndGet(dependencies: RepositoryDependencies): RepositoryComponent =
+            DaggerRepositoryComponent.builder()
+                .repositoryDependencies(dependencies)
+                .build()
+    }
 }

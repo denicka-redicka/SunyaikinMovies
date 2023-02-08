@@ -17,6 +17,10 @@ data class MovieDetailsResponse(
     val description: String?,
     @SerialName("countries")
     val countries: List<Country>?,
+    @SerialName("posterUrlPreview")
+    val posterUrlPreview: String?,
+    @SerialName("year")
+    val year: Int?
 )
 
 @Serializable

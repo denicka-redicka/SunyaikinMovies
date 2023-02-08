@@ -5,14 +5,14 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core.data.Movie
 import com.example.core.data.MovieDetails
-import com.example.impl.di.CoreNetworkApi
+import com.example.impl.data.MoviesRemoteDataSourceApi
 
 class MoviesPagingDataSource(
-    private val api: CoreNetworkApi<List<Movie>, MovieDetails>
+    private val api: MoviesRemoteDataSourceApi<List<Movie>, MovieDetails>
 
 ) : PagingSource<Int, Movie>() {
 
-    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Movie>): Int {
         val anchorPosition = state.anchorPosition ?: return INITIAL_VALUE
         val page = state.closestPageToPosition(anchorPosition) ?: return INITIAL_VALUE
         return page.prevKey?.plus(1) ?: page.nextKey?.minus(1) ?: INITIAL_VALUE
@@ -21,7 +21,7 @@ class MoviesPagingDataSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         val pageNumber = params.key ?: INITIAL_VALUE
         return try {
-            val response = api.moviesRemoteService().getMoviesList(pageNumber)
+            val response = api.getMoviesList(pageNumber)
             val prevPageNumber: Int? = if (pageNumber == 1) null else (pageNumber - 1)
             val nextPageNumber: Int? = pageNumber + 1
 

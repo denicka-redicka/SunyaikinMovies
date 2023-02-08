@@ -2,15 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
     
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/headerLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragmentContainer"
         android:layout_marginTop="44dp"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginHorizontal="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -22,7 +25,7 @@
             android:textStyle="bold"
             android:layout_weight="1"
             android:textColor="#ff000000"
-            android:text="Популярные"/>
+            android:text="@string/popular"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/searchButton"
@@ -41,7 +44,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="2dp"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/app_navigation"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        tools:layout="@layout/fragment_movies_layout"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/moviesButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cornerRadius="100dp"
+        android:textSize="12sp"
+        android:backgroundTint="@color/primaryButton"
+        android:text="@string/popular"
+        android:layout_marginHorizontal="18dp"
+        android:textColor="@color/secondaryButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/favoritesButton"
+        android:layout_marginBottom="24dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/favoritesButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cornerRadius="100dp"
+        android:textSize="12sp"
+        android:backgroundTint="@color/secondaryButton"
+        android:text="@string/favorites"
+        android:layout_marginHorizontal="18dp"
+        app:layout_constraintBottom_toBottomOf="@id/moviesButton"
+        app:layout_constraintStart_toEndOf="@id/moviesButton"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

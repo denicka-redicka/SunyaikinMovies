@@ -12,11 +12,14 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core-local-api" />
+            <option value="$PROJECT_DIR$/core-local-impl" />
             <option value="$PROJECT_DIR$/core-network-api" />
             <option value="$PROJECT_DIR$/core-network-impl" />
             <option value="$PROJECT_DIR$/core-repository-api" />
             <option value="$PROJECT_DIR$/core-repository-impl" />
             <option value="$PROJECT_DIR$/core-ui" />
+            <option value="$PROJECT_DIR$/feature-favorites" />
             <option value="$PROJECT_DIR$/feature-movie-details" />
             <option value="$PROJECT_DIR$/feauture-movies-impl" />
           </set>

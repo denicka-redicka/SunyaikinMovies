@@ -6,7 +6,9 @@ interface MoviesRepository <Movies, MoviesInfo> {
 
     suspend fun getMovieInfo(id: Int): MoviesInfo
 
-    suspend fun getFavoritesList(): Movies
+    suspend fun getFavoritesList(): List<MoviesInfo>
 
     suspend fun saveMovie(id: Int)
+
+    fun removeMovie(id: Int)
 }

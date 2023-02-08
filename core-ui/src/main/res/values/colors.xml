@@ -4,4 +4,5 @@
     <color name="secondaryButton">#FFDEEFFF</color>
     <color name="primary_text">#FF000000</color>
     <color name="secondary_text">#99000000</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

@@ -5,10 +5,5 @@ data class Movie(
     val name: String,
     val year: String,
     val posterUrlPreview: String,
-    val isFavorite: Boolean
-)
-
-data class MoviesWithPages(
-    val page: Int,
-    val movies: List<Movie>
+    var isFavorite: Boolean
 )
