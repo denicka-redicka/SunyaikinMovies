@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount < 1)
+        if (supportFragmentManager.backStackEntryCount <= 1)
             super.onBackPressed()
         else
             router.navigateTo(NavigationDestination.Back)

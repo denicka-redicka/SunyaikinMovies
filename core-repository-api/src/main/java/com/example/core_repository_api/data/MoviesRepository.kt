@@ -10,5 +10,5 @@ interface MoviesRepository <Movies, MoviesInfo> {
 
     suspend fun saveMovie(id: Int)
 
-    fun removeMovie(id: Int)
+    suspend fun removeMovie(id: Int)
 }

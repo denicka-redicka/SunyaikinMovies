@@ -8,17 +8,20 @@ class MoviesLocalDataSourceImpl @Inject constructor(
     private val dao: MoviesDao
 ) : MoviesLocalDataSource<@JvmSuppressWildcards MovieDetails> {
 
-    override fun getFavoritesList(): List<MovieDetails> = dao.getAll().map { it.toMovieDetails() }
+    override suspend fun getFavoritesList(): List<MovieDetails> =
+        dao.getAll().map { it.toMovieDetails() }
 
 
-    override fun saveMovie(movie: MovieDetails) {
+    override suspend fun saveMovie(movie: MovieDetails) {
         dao.insert(movie.toMovieModel())
     }
 
-    override fun removeMovie(id: Int) {
+    override suspend fun removeMovie(id: Int) {
         dao.removeMovie(id)
     }
 
-    override fun getMoviesDetails(id: Int): MovieDetails = dao.getMovie(id).toMovieDetails()
+    override suspend fun getMoviesDetails(id: Int): MovieDetails? =
+        dao.getMovie(id)?.toMovieDetails()
 
+    override suspend fun getSavedIds(): List<Int> = dao.getIds()
 }

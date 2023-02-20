@@ -29,14 +29,16 @@ class MoviesRepositoryImpl @Inject constructor(
             config = PagingConfig(5, enablePlaceholders = true),
             pagingSourceFactory = {
                 MoviesPagingDataSource(
-                    networkApi.moviesRemoteService()
+                    networkApi.moviesRemoteService(),
+                    dao
                 )
             })
         return pager.flow
     }
 
     override suspend fun getMovieInfo(id: Int): MovieDetails = withContext(Dispatchers.IO) {
-        return@withContext networkApi.moviesRemoteService().getMoviesInfo(id)
+        return@withContext dao.getMoviesDetails(id) ?:
+        networkApi.moviesRemoteService().getMoviesInfo(id)
     }
 
     override suspend fun getFavoritesList(): List<MovieDetails> {
@@ -48,7 +50,7 @@ class MoviesRepositoryImpl @Inject constructor(
         dao.saveMovie(movie)
     }
 
-    override fun removeMovie(id: Int) {
+    override suspend fun removeMovie(id: Int) {
         dao.removeMovie(id)
     }
 }

@@ -10,11 +10,14 @@ interface MoviesDao {
     fun getAll(): List<MovieModel>
 
     @Query("SELECT * from movies WHERE movie_id =:id")
-    fun getMovie(id: Int): MovieModel
+    fun getMovie(id: Int): MovieModel?
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insert(movie: MovieModel): Long
 
     @Query("DELETE FROM movies WHERE movie_id = :id")
     fun removeMovie(id: Int)
+
+    @Query("SELECT movie_id from movies")
+    fun getIds(): List<Int>
 }

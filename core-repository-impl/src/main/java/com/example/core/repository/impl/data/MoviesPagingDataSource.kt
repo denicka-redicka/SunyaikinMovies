@@ -5,10 +5,14 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core.data.Movie
 import com.example.core.data.MovieDetails
+import com.example.impl.data.MoviesLocalDataSource
 import com.example.impl.data.MoviesRemoteDataSourceApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MoviesPagingDataSource(
-    private val api: MoviesRemoteDataSourceApi<List<Movie>, MovieDetails>
+    private val api: MoviesRemoteDataSourceApi<List<Movie>, MovieDetails>,
+    private val dao: MoviesLocalDataSource<MovieDetails>
 
 ) : PagingSource<Int, Movie>() {
 
@@ -22,6 +26,12 @@ class MoviesPagingDataSource(
         val pageNumber = params.key ?: INITIAL_VALUE
         return try {
             val response = api.getMoviesList(pageNumber)
+            val savedFilmsIds = withContext(Dispatchers.IO){
+                dao.getSavedIds()
+            }
+            response.forEach { movie ->
+                movie.isFavorite = savedFilmsIds.contains(movie.movieId)
+            }
             val prevPageNumber: Int? = if (pageNumber == 1) null else (pageNumber - 1)
             val nextPageNumber: Int? = pageNumber + 1
 
